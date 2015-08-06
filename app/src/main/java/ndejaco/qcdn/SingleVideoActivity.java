@@ -27,6 +27,7 @@ public class SingleVideoActivity extends ActionBarActivity {
     private long startTime;
     private long endTime;
     private int videoIndex;
+    private String networkType;
 
 
     @Override
@@ -36,10 +37,12 @@ public class SingleVideoActivity extends ActionBarActivity {
 
         if (getIntent().getStringExtra("Network Type").equals("qcdn")) {
             myPlaylist = new Playlist("qcdn");
+            networkType = "QCDN";
         }
 
         else {
             myPlaylist = new Playlist("cell network");
+            networkType = "LTE/3G Network";
         }
 
         videoIndex = 0;
@@ -50,7 +53,7 @@ public class SingleVideoActivity extends ActionBarActivity {
         videoView = (VideoView) findViewById(R.id.videoView);
         pDialog = new ProgressDialog(SingleVideoActivity.this);
 
-        pDialog.setTitle("Android Video Streaming Tutorial");
+        pDialog.setTitle("Loading Video from " + networkType);
         pDialog.setMessage("Buffering...");
         pDialog.setIndeterminate(false);
         pDialog.setCancelable(false);
